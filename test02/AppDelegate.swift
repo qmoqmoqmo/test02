@@ -7,15 +7,33 @@
 //
 
 import UIKit
+import SlideMenuControllerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var myNavigationController: UINavigationController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+
+        let mainViewController: MainViewController = MainViewController()
+        let leftViewController: LeftMenuViewController = LeftMenuViewController()
+        let rightViewController: RightMenuViewController = RightMenuViewController()
+        
+        let slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController, rightMenuViewController: rightViewController)
+        
+        //slideMenuController.addLeftBarButtonWithImage(UIImage(named: "hoge")!)
+        //slideMenuController.addRightBarButtonWithImage(UIImage(named: "fuga")!)
+
+        //let first: ViewController = ViewController()
+        myNavigationController = UINavigationController(rootViewController: slideMenuController)
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        
+        //self.window?.rootViewController = slideMenuController
+        self.window?.rootViewController = myNavigationController
+        self.window?.makeKeyAndVisible()
         return true
     }
 
